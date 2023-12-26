@@ -1,5 +1,27 @@
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import UserInfo from './UserInfo';
+import UserAddress from './UserAddress';
+import Main from './Main';
+import Menu from './Menu';
+import { Routes, Route } from 'react-router-dom';
+
 function App() {
-  return <div className="App"></div>;
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <Menu />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/info" element={<UserInfo />} />
+          <Route path="/address" element={<UserAddress />} />
+        </Routes>
+      </div>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
